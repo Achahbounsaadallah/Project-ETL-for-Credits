@@ -11,21 +11,23 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
+server = os.getenv("DB_HOST")
+user = os.getenv("DB_USER")
+password = os.getenv("DB_PASSWORD")
+database_dw = os.getenv("DW_NAME")
+database = os.getenv("DB_NAME")
 
 
 spark = SparkSession.builder \
     .appName("DW_Credit") \
-    .config(
-        "spark.jars",
-        "file:///C:/Users/saad2/Downloads/sqljdbc_13.4.0.0_fra/sqljdbc_13.4/fra/jars/mssql-jdbc-13.4.0.jre11.jar"
-    ) \
+    .config("spark.jars", "/opt/airflow/jars/mssql-jdbc-13.4.0.jre11.jar") \
     .getOrCreate()
 
 df = spark.read \
     .format("jdbc") \
     .option(
     "url",
-    "jdbc:sqlserver://localhost:1433;databaseName=Credit_details_DB;encrypt=true;trustServerCertificate=true"
+    f"jdbc:sqlserver://{server}:1433;databaseName={database};encrypt=true;trustServerCertificate=true"
     ) \
     .option("dbtable", "stg_credit") \
     .option("user", os.getenv("DB_USER")) \
@@ -180,11 +182,11 @@ fact_credit = fact.select(
     col("montant_mdhs")
 )
 
-url = "jdbc:sqlserver://localhost:1433;databaseName=Credit_DW;encrypt=true;trustServerCertificate=true"
+url = f"jdbc:sqlserver://{server}:1433;databaseName={database_dw};encrypt=true;trustServerCertificate=true"
 
 properties = {
-    "user": "saad2",
-    "password": "saad123",
+    "user": user,
+    "password": password,
     "driver": "com.microsoft.sqlserver.jdbc.SQLServerDriver"
 }
 

@@ -1,26 +1,61 @@
+# ========================
+# 🔐 Secrets / config
+# ========================
 .env
+*.env
 
-# Environnement virtuel
-venv/
-
-# Python
+# ========================
+# 🐍 Python
+# ========================
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
 
-# Data locales
-data/
-# ou si tu veux garder data/ mais ignorer seulement les gros dossiers :
-# data/raw/
-# data/staging/
-# data/warehouse/
+# ========================
+# 🧪 Environnements virtuels
+# ========================
+venv/
+.venv/
+.venv311/
 
-# Logs et caches
+# ========================
+# 📊 Données (locales)
+# ========================
+data/
+*.csv
+*.parquet
+
+# ========================
+# 📦 Airflow
+# ========================
+logs/
+airflow.db
+airflow-webserver.pid
+
+# ========================
+# ⚙️ Spark / JARs
+# ========================
+jars/
+spark/jars/
+
+# ========================
+# 🧰 Build / cache
+# ========================
 *.log
 .pytest_cache/
 *.egg-info/
+dist/
+build/
 
-# IDE
+# ========================
+# 💻 IDE
+# ========================
 .vscode/
 .idea/
+
+# ========================
+# 🐳 Docker
+# ========================
+*.pid
+*.tmp

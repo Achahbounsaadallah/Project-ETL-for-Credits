@@ -133,16 +133,14 @@ def transformer_pivot(file_path):
     return pd.DataFrame(data)
 
 
-# ----------------------------------------------------
-# EXECUTION ET TEST SUR VOS FICHIERS
-# ----------------------------------------------------
+
 liste_paths = [
-    "D:/stage 2026/projet sakane credit/data/raw/damane sakane genre/2025/main new not like others_2025.xlsx",
-    "D:/stage 2026/projet sakane credit/data/raw/damane sakane genre/2025/novembre Not like others sss _2025.xlsx",
-    "D:/stage 2026/projet sakane credit/data/raw/damane sakane genre/2025/Octobre_ not like others_2025.xlsx",
-    "D:/stage 2026/projet sakane credit/data/raw/damane sakane genre/2025/septembre not like others_2025.xls",
-    "D:/stage 2026/projet sakane credit/data/raw/damane sakane genre/2025/juillet not like others v3nn_2025.xlsx",
-    "D:/stage 2026/projet sakane credit/data/raw/damane sakane genre/2025/JUIN not like others v3nnn_2025.xlsx",
+    "/opt/airflow/data/raw/damane sakane genre/2025/main new not like others_2025.xlsx",
+    "/opt/airflow/data/raw/damane sakane genre/2025/novembre not like others_2025.xls",
+    "/opt/airflow/data/raw/damane sakane genre/2025/Octobre_ not like others_2025.xlsx",
+    "/opt/airflow/data/raw/damane sakane genre/2025/septembre not like others_2025.xls",
+    "/opt/airflow/data/raw/damane sakane genre/2025/juillet not like others v3nn_2025.xlsx",
+    "/opt/airflow/data/raw/damane sakane genre/2025/JUIN not like others v3nnn_2025.xlsx",
 
 ]
 
@@ -155,9 +153,20 @@ def stg_collecte_not_like_others_2025():
 
     return all_data
 
-df_final = pd.DataFrame(stg_collecte_not_like_others_2025())
 
-# Trier pour plus de lisibilité
-df_final = df_final.sort_values(by=["annee", "mois", "region"])
+pd.set_option('display.max_rows', None)
+pd.set_option('display.max_columns', None)
+pd.set_option('display.width', None)
+pd.set_option('display.max_colwidth', None)
+data = stg_collecte_not_like_others_2025()
+df_final = pd.DataFrame(data)
 
-# Affichage propre
+# trier les données
+df_final = df_final.sort_values(by=["annee", "mois", "region", "type_credit"])
+
+# reset index
+df_final = df_final.reset_index(drop=True)
+
+#print(df_final)
+print(df_final)
+

@@ -81,12 +81,12 @@ def transformer_fichier(file_path):
 
 list_paths = [
     
-    "D:/stage 2026/projet sakane credit/data/raw/damane sakane genre/2024/decembre_2024.xls",
-    "D:/stage 2026/projet sakane credit/data/raw/damane sakane genre/2024/novembre_2024.xls",
-    "D:/stage 2026/projet sakane credit/data/raw/damane sakane genre/2024/octobre_2024.xls",
-    "D:/stage 2026/projet sakane credit/data/raw/damane sakane genre/2024/septembre_2024.xls",
-    "D:/stage 2026/projet sakane credit/data/raw/damane sakane genre/2025/JANV_2025.xls",
-    "D:/stage 2026/projet sakane credit/data/raw/damane sakane genre/2025/mars_2025.xls"
+    "/opt/airflow/data/raw/damane sakane genre/2024/decembre_2024.xls",
+    "/opt/airflow/data/raw/damane sakane genre/2024/novembre_2024.xls",
+    "/opt/airflow/data/raw/damane sakane genre/2024/octobre_2024.xls",
+    "/opt/airflow/data/raw/damane sakane genre/2024/septembre_2024.xls",
+    "/opt/airflow/data/raw/damane sakane genre/2025/JANV_2025.xls",
+    "/opt/airflow/data/raw/damane sakane genre/2025/mars_2025.xls"
     
 ]
 
@@ -99,3 +99,19 @@ def stg_collecte_2024_2025():
 
     return all_data
 
+
+pd.set_option('display.max_rows', None)
+pd.set_option('display.max_columns', None)
+pd.set_option('display.width', None)
+pd.set_option('display.max_colwidth', None)
+data = stg_collecte_2024_2025()
+df_final = pd.DataFrame(data)
+
+# trier les données
+df_final = df_final.sort_values(by=["annee", "mois", "region", "type_credit"])
+
+# reset index
+df_final = df_final.reset_index(drop=True)
+
+#print(df_final)
+print(df_final)

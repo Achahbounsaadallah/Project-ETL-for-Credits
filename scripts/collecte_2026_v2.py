@@ -122,9 +122,9 @@ def transformer_fichier(file_path):
 
 # 🔁 TRAITEMENT DE PLUSIEURS FICHIERS
 list_paths = [
-    "D:/stage 2026/projet sakane credit/data/raw/damane sakane genre/2026/juin_2026.xls",
-    "D:/stage 2026/projet sakane credit/data/raw/damane sakane genre/2026/mai_2026.xls",
-    "D:/stage 2026/projet sakane credit/data/raw/damane sakane genre/2026/Mars_2026.xls",
+    "/opt/airflow/data/raw/damane sakane genre/2026/juin_2026.xls",
+    "/opt/airflow/data/raw/damane sakane genre/2026/mai_2026.xls",
+    "/opt/airflow/data/raw/damane sakane genre/2026/Mars_2026.xls",
 ]
 
 
@@ -136,6 +136,24 @@ def stg_collecte_2026_v2():
         all_data.extend(df.to_dict(orient="records"))
 
     return all_data
+
+
+pd.set_option('display.max_rows', None)
+pd.set_option('display.max_columns', None)
+pd.set_option('display.width', None)
+pd.set_option('display.max_colwidth', None)
+data = stg_collecte_2026_v2()
+df_final = pd.DataFrame(data)
+
+# trier les données
+df_final = df_final.sort_values(by=["annee", "mois", "region", "type_credit"])
+
+# reset index
+df_final = df_final.reset_index(drop=True)
+
+#print(df_final)
+print(df_final)
+
 
 
 

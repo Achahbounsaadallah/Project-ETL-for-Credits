@@ -7,12 +7,13 @@ load_dotenv()
 
 server = os.getenv('DB_HOST')
 database = os.getenv('DB_NAME')
-print(f"Server: {server}, Database: {database}")
+username = os.getenv('DB_USER')
+password = os.getenv('DB_PASSWORD')
+print(f"Server: {server}, Database: {database}, User: {username}")
 
 connection_string = (
-    f"mssql+pyodbc://@{server}/{database}"
+    f"mssql+pyodbc://{username}:{password}@{server}/{database}"
     "?driver=ODBC+Driver+17+for+SQL+Server"
-    "&trusted_connection=yes"
 )
 
 engine = sa.create_engine(connection_string)

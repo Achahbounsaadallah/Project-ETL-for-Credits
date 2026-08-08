@@ -1,3 +1,7 @@
 pandas
 sqlalchemy
 pyspark
+openpyxl
+dotenv
+pyodbc
+xlrd
