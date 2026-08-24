@@ -28,6 +28,9 @@ with DAG(
         task_id="run_add_data_to_dw",
         bash_command="python /opt/airflow/spark/add_data_to_DW.py",
     )
+    run_powerbi_refresh = BashOperator(
+        task_id="run_powerbi_refresh",
+        bash_command="python /opt/airflow/powerbi/powerbi.py",
+    )
 
-    run_connection_script >> run_add_data_to_dw
-    
+    run_connection_script >> run_add_data_to_dw >> run_powerbi_refresh

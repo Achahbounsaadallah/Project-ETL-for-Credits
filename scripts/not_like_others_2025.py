@@ -135,12 +135,21 @@ def transformer_pivot(file_path):
 
 
 liste_paths = [
-    "/opt/airflow/data/raw/damane sakane genre/2025/main new not like others_2025.xlsx",
-    "/opt/airflow/data/raw/damane sakane genre/2025/novembre not like others_2025.xls",
+    "/opt/airflow/data/raw/damane sakane genre/2025/mai new not like others_2025.xlsx",
+    "/opt/airflow/data/raw/damane sakane genre/2025/novembre Not like others sss _2025.xlsx",
     "/opt/airflow/data/raw/damane sakane genre/2025/Octobre_ not like others_2025.xlsx",
     "/opt/airflow/data/raw/damane sakane genre/2025/septembre not like others_2025.xls",
     "/opt/airflow/data/raw/damane sakane genre/2025/juillet not like others v3nn_2025.xlsx",
     "/opt/airflow/data/raw/damane sakane genre/2025/JUIN not like others v3nnn_2025.xlsx",
+
+]
+liste_paths2 = [
+    "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/mai new not like others_2025.xlsx",
+    "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/novembre Not like others sss _2025.xlsx",
+    "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/Octobre_ not like others_2025.xlsx",
+    "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/septembre not like others_2025.xls",
+    "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/juillet not like others v3nn_2025.xlsx",
+    "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/JUIN not like others v3nnn_2025.xlsx",
 
 ]
 

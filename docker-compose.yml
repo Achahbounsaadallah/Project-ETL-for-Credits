@@ -34,6 +34,7 @@ services:
       - ./data:/opt/airflow/data
       - ./plugins:/opt/airflow/plugins
       - ./logs:/opt/airflow/logs
+      - ./powerbi:/opt/airflow/powerbi
     command: >
       bash -c "
       airflow db init &&
@@ -64,6 +65,7 @@ services:
       - ./data:/opt/airflow/data
       - ./plugins:/opt/airflow/plugins
       - ./logs:/opt/airflow/logs
+      - ./powerbi:/opt/airflow/powerbi
     ports:
       - "8080:8080"
     command: airflow webserver
@@ -89,6 +91,7 @@ services:
       - ./data:/opt/airflow/data
       - ./plugins:/opt/airflow/plugins
       - ./logs:/opt/airflow/logs
+      - ./powerbi:/opt/airflow/powerbi
     command: airflow scheduler
 
 volumes:
