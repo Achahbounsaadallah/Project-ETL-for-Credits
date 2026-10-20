@@ -111,7 +111,7 @@ def transformer_fichier(file_path):
                     "region": region,
                     "type_credit": produit_actuel,
                     "nb_menages": to_float(nb),
-                    "montant_mdhs": to_float(mt),
+                    "montant_mdhs": to_float(mt)/1_000_000,
                 })
 
             except:
@@ -119,25 +119,26 @@ def transformer_fichier(file_path):
 
     return pd.DataFrame(data)
 
-
-# 🔁 TRAITEMENT DE PLUSIEURS FICHIERS
 list_paths = [
-    "/opt/airflow/data/raw/damane sakane genre/2026/juin_2026.xls",
-    "/opt/airflow/data/raw/damane sakane genre/2026/mai_2026.xls",
-    "/opt/airflow/data/raw/damane sakane genre/2026/Mars_2026.xls",
-]
-
+        "/opt/airflow/data/raw/damane sakane genre/2026/juin_2026.xls",
+        "/opt/airflow/data/raw/damane sakane genre/2026/mai_2026.xls",
+        "/opt/airflow/data/raw/damane sakane genre/2026/Mars_2026.xls",
+    ]
 
 all_data = []
 
 def stg_collecte_2026_v2():
-    for path in list_paths:
-        df = transformer_fichier(path)
-        all_data.extend(df.to_dict(orient="records"))
+        for path in list_paths:
+            df = transformer_fichier(path)
+            all_data.extend(df.to_dict(orient="records"))
 
-    return all_data
+        return all_data
+if __name__ == "__main__":
+    stg_collecte_2026_v2()
+    
 
 
+'''
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width', None)
@@ -154,7 +155,7 @@ df_final = df_final.reset_index(drop=True)
 #print(df_final)
 print(df_final)
 
-
+'''
 
 
 

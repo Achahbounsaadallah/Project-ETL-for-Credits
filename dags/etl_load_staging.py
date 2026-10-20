@@ -21,7 +21,7 @@ with DAG(
 ) as dag:
 
     run_connection_script = BashOperator(
-        task_id="run_connection_to_db",
+        task_id="run_collecte",
         bash_command="python /opt/airflow/scripts/connection_to_db.py",
     )
     run_add_data_to_dw = BashOperator(

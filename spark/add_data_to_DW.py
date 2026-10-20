@@ -48,7 +48,7 @@ df_clean = df_clean.withColumn(
 df_clean = df_clean.filter(
     col("region_clean").isNotNull() &
     (~col("region_clean").isin("TOTAL", "TOTAL NATIONAL")) &
-    (~col("region_clean").rlike("^[0-9\\.]+$"))
+    (~col("region_clean").rlike("^[0-9\\.]+$"))  #!!
 )
 
 # 🔹 3. CORRECTION des erreurs d'écriture (accents / variantes)
@@ -130,7 +130,7 @@ df_clean = df_clean.withColumn("mois_num",
 df_clean = df_clean.filter(col("mois_num").isNotNull())
 df_clean = df_clean.withColumn(
     "mois_num_str",
-    lpad(col("mois_num").cast("string"), 2, "0")
+    lpad(col("mois_num").cast("string"), 2, "0") # lpad(valeur, longueur, caractère a ajouter ) ajouter des 0 à gauche pour avoir un format de 2 chiffres pour le mois
 )
 
 df_clean = df_clean.withColumn(
@@ -155,17 +155,21 @@ dim_temps = df_clean.select(
 
 dim_temps = dim_temps.withColumn("DateKey", monotonically_increasing_id())
 
+
 dim_genre = df_clean.select("genre").dropDuplicates()
 
 dim_genre = dim_genre.withColumn("GenreKey", monotonically_increasing_id())
+
 
 dim_region = df_clean.select("region_clean").dropDuplicates()
 
 dim_region = dim_region.withColumn("RegionKey", monotonically_increasing_id())
 
+
 dim_credit = df_clean.select("type_credit").dropDuplicates()
 
 dim_credit = dim_credit.withColumn("CreditKey", monotonically_increasing_id())
+
 
 fact = df_clean \
     .join(dim_temps, ["date"]) \

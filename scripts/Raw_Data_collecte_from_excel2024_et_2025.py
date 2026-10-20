@@ -78,27 +78,55 @@ def transformer_fichier(file_path):
 
     return pd.DataFrame(data)
 
+# 🔁 TRAITEMENT DE PLUSIEURS FICHIERS
 
 list_paths = [
-    
-    "/opt/airflow/data/raw/damane sakane genre/2024/decembre_2024.xls",
-    "/opt/airflow/data/raw/damane sakane genre/2024/novembre_2024.xls",
-    "/opt/airflow/data/raw/damane sakane genre/2024/octobre_2024.xls",
-    "/opt/airflow/data/raw/damane sakane genre/2024/septembre_2024.xls",
-    "/opt/airflow/data/raw/damane sakane genre/2025/JANV_2025.xls",
-    "/opt/airflow/data/raw/damane sakane genre/2025/mars_2025.xls"
-    
-]
+        
+        "/opt/airflow/data/raw/damane sakane genre/2024/décembre_2024.xls",
+        "/opt/airflow/data/raw/damane sakane genre/2024/novembre_2024.xls",
+        "/opt/airflow/data/raw/damane sakane genre/2024/octobre_2024.xls",
+        "/opt/airflow/data/raw/damane sakane genre/2024/septembre_2024.xls",
+        "/opt/airflow/data/raw/damane sakane genre/2025/janvier_2025.xls",
+        "/opt/airflow/data/raw/damane sakane genre/2025/mars_2025.xls",
+
+        "/opt/airflow/data/raw/damane sakane genre/2025/février_2025.xls",
+        "/opt/airflow/data/raw/damane sakane genre/2025/avril_2025.xls",
+
+    ]
 
 all_data = []
 
 def stg_collecte_2024_2025():
-    for path in list_paths:
-        df = transformer_fichier(path)
-        all_data.extend(df.to_dict(orient="records"))
+        for path in list_paths:
+            df = transformer_fichier(path)
+            all_data.extend(df.to_dict(orient="records"))
 
-    return all_data
+        return all_data
+if __name__ == "__main__":
+    stg_collecte_2024_2025()
 
+    
+
+'''
+list_paths = [
+        "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2024/décembre_2024.xls",
+        "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2024/novembre_2024.xls",
+        "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2024/octobre_2024.xls",
+        "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2024/septembre_2024.xls",
+        "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/janvier_2025.xls",
+        "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/mars_2025.xls",
+        "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/février_2025.xls",
+        "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/avril_2025.xls"
+        
+    ]
+all_data = []
+
+def stg_collecte_2024_2025():
+        for path in list_paths:
+            df = transformer_fichier(path)
+            all_data.extend(df.to_dict(orient="records"))
+
+        return all_data
 
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
@@ -115,3 +143,4 @@ df_final = df_final.reset_index(drop=True)
 
 #print(df_final)
 print(df_final)
+'''

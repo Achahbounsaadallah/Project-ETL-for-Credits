@@ -73,31 +73,33 @@ def transformer_fichier(file_path):
                     "region": region,
                     "type_credit": produit_actuel,
                     "nb_menages": to_float(nb),
-                    "montant_mdhs": to_float(mt),
+                    "montant_mdhs": to_float(mt)/1_000_000,
                 })
 
             except:
                 continue
 
     return pd.DataFrame(data)
-
-# 🔥 TEST
+    # 🔥 TEST
 list_paths = [
-    "/opt/airflow/data/raw/damane sakane genre/2026/avril_2026.xls",
-    "/opt/airflow/data/raw/damane sakane genre/2026/fev_2026.xlsx",
-    "/opt/airflow/data/raw/damane sakane genre/2026/janvier_2026.xlsx",
-    
+        "/opt/airflow/data/raw/damane sakane genre/2026/avril_2026.xls",
+        "/opt/airflow/data/raw/damane sakane genre/2026/février_2026.xlsx",
+        "/opt/airflow/data/raw/damane sakane genre/2026/janvier_2026.xlsx",
+        
 
-]
+    ]
 
 all_data = []
 
 def stg_collecte_2026():
-    for path in list_paths:
-        df = transformer_fichier(path)
-        all_data.extend(df.to_dict(orient="records"))
+        for path in list_paths:
+            df = transformer_fichier(path)
+            all_data.extend(df.to_dict(orient="records"))
 
-    return all_data
+        return all_data
+if __name__ == "__main__":
+    stg_collecte_2026()
+
 
 
 

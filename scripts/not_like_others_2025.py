@@ -132,37 +132,54 @@ def transformer_pivot(file_path):
 
     return pd.DataFrame(data)
 
-
-
 liste_paths = [
-    "/opt/airflow/data/raw/damane sakane genre/2025/mai new not like others_2025.xlsx",
-    "/opt/airflow/data/raw/damane sakane genre/2025/novembre Not like others sss _2025.xlsx",
-    "/opt/airflow/data/raw/damane sakane genre/2025/Octobre_ not like others_2025.xlsx",
-    "/opt/airflow/data/raw/damane sakane genre/2025/septembre not like others_2025.xls",
-    "/opt/airflow/data/raw/damane sakane genre/2025/juillet not like others v3nn_2025.xlsx",
-    "/opt/airflow/data/raw/damane sakane genre/2025/JUIN not like others v3nnn_2025.xlsx",
+        "/opt/airflow/data/raw/damane sakane genre/2025/mai new not like others_2025.xlsx",
+        "/opt/airflow/data/raw/damane sakane genre/2025/novembre Not like others sss _2025.xlsx",
+        "/opt/airflow/data/raw/damane sakane genre/2025/Octobre_ not like others_2025.xlsx",
+        "/opt/airflow/data/raw/damane sakane genre/2025/septembre not like others_2025.xls",
+        "/opt/airflow/data/raw/damane sakane genre/2025/juillet not like others v3nn_2025.xlsx",
+        "/opt/airflow/data/raw/damane sakane genre/2025/JUIN not like others v3nnn_2025.xlsx",
 
-]
+        "/opt/airflow/data/raw/damane sakane genre/2025/décembre FOGALOGE FOGARIM _2025.xls",
+        "/opt/airflow/data/raw/damane sakane genre/2025/août not like others _2025.xls",
+        
+
+    ]
+    
+
+all_data = []
+def stg_collecte_not_like_others_2025():
+        for path in liste_paths:
+            df = transformer_pivot(path)
+            all_data.extend(df.to_dict(orient="records"))
+
+        return all_data
+
+if __name__ == "__main__":
+    stg_collecte_not_like_others_2025()
+    
+'''
 liste_paths2 = [
-    "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/mai new not like others_2025.xlsx",
-    "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/novembre Not like others sss _2025.xlsx",
-    "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/Octobre_ not like others_2025.xlsx",
-    "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/septembre not like others_2025.xls",
-    "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/juillet not like others v3nn_2025.xlsx",
-    "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/JUIN not like others v3nnn_2025.xlsx",
+    
+        "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/mai new not like others_2025.xlsx",
+        "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/novembre Not like others sss _2025.xlsx",
+        "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/Octobre_ not like others_2025.xlsx",
+        "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/septembre not like others_2025.xls",
+        "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/juillet not like others v3nn_2025.xlsx",
+        "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/JUIN not like others v3nnn_2025.xlsx",
+    
+        "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/décembre FOGALOGE FOGARIM _2025.xls",
+       "D:/stage 2026/Project_new_version/Project-ETL-for-Credits/data/raw/damane sakane genre/2025/août not like others _2025.xls"
 
-]
-
+    ]
 all_data = []
 
 def stg_collecte_not_like_others_2025():
-    for path in liste_paths:
-        df = transformer_pivot(path)
-        all_data.extend(df.to_dict(orient="records"))
+        for path in liste_paths2:
+            df = transformer_pivot(path)
+            all_data.extend(df.to_dict(orient="records"))
 
-    return all_data
-
-
+        return all_data
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width', None)
@@ -178,4 +195,4 @@ df_final = df_final.reset_index(drop=True)
 
 #print(df_final)
 print(df_final)
-
+'''
